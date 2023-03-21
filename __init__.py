@@ -15,7 +15,7 @@ bl_info = {
     "name": "RefSimilarImage",
     "description": "This is an add-on that uses BlendRef card nodes and loads images from outside",
     "author": "Yuuzen401",
-    "version": (0, 0, 1),
+    "version": (0, 0, 2),
     "blender": (2, 80, 0),
     "location":  "",
     "warning": "",
@@ -116,6 +116,7 @@ class file() :
             if image:
                 node = ntree.nodes.new(type = "CardNode")
                 node.image = image
+                node.width = 400
 
         # From Code BlendRef LICENSE GNU
         # ****************************************************
@@ -145,7 +146,7 @@ class file() :
         timestamp = str(int(time.time()))
         tmp_file = tmp_dir + "tmp_" + timestamp + ".jpg"
 
-        for tmp in  glob.glob(tmp_dir + "/tmp_*.jpg") :
+        for tmp in glob.glob(tmp_dir + "/tmp_*.jpg") :
             os.remove(tmp)
 
         if prop.image_method == "SELECT_IMAGE" :
@@ -212,8 +213,8 @@ class RefSimilarImageOperator(bpy.types.Operator, file):
 class VIEW3D_PT_RefSimilarImagePanel(bpy.types.Panel):
     bl_space_type = "NODE_EDITOR"
     bl_region_type = 'UI'
-    bl_category = "Similar Image Search"
-    bl_label = "Similar Image Search"
+    bl_category = "RefSimilarImage"
+    bl_label = "RefSimilarImage"
     
     @classmethod
     def poll(self, context):
